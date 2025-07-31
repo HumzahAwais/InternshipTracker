@@ -1,5 +1,7 @@
 # Internship Tracker
 
+Check it out here: [Internship Tracker by Humzah](https://internship-tracker-1idky133b-humzahs-projects.vercel.app/)
+
 A simple full-stack internship tracking application built with:
 
 - Next.js
