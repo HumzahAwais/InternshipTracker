@@ -1,5 +1,4 @@
 "use client";
-import Image from "next/image";
 import AddInternshipForm from "@/components/AddInternshipForm";
 import InternshipList from "@/components/InternshipList";
 import { useState } from "react";
