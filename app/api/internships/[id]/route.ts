@@ -3,15 +3,9 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
-type RouteParams = {
-  params: {
-    id: string;
-  };
-};
-
 export async function DELETE(
   request: NextRequest,
-  { params }: RouteParams
+  { params }: { params: { id: string } }
 ): Promise<NextResponse> {
   try {
     const { id } = params;
@@ -38,7 +32,7 @@ export async function DELETE(
 
 export async function PUT(
   request: NextRequest,
-  { params }: RouteParams
+  { params }: { params: { id: string } }
 ): Promise<NextResponse> {
   try {
     const { id } = params;
