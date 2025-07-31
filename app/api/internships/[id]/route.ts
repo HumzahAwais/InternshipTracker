@@ -3,14 +3,17 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
+interface RouteParams {
+  params: { id: string };
+}
+
 export async function DELETE(
   request: Request,
-  { params }: { params: { id: string } }
-) {
+  { params }: RouteParams
+): Promise<NextResponse> {
   try {
     const { id } = params;
     
-    // Validate ID
     if (isNaN(Number(id))) {
       return NextResponse.json(
         { error: "Invalid internship ID" },
@@ -23,6 +26,7 @@ export async function DELETE(
     });
     return NextResponse.json({ success: true });
   } catch (error) {
+    console.error("Delete error:", error);
     return NextResponse.json(
       { error: "Failed to delete internship" },
       { status: 500 }
@@ -32,13 +36,12 @@ export async function DELETE(
 
 export async function PUT(
   request: Request,
-  { params }: { params: { id: string } }
-) {
+  { params }: RouteParams
+): Promise<NextResponse> {
   try {
     const { id } = params;
     const data = await request.json();
 
-    // Validate ID
     if (isNaN(Number(id))) {
       return NextResponse.json(
         { error: "Invalid internship ID" },
@@ -58,6 +61,7 @@ export async function PUT(
     });
     return NextResponse.json(updatedInternship);
   } catch (error) {
+    console.error("Update error:", error);
     return NextResponse.json(
       { error: "Failed to update internship" },
       { status: 500 }
