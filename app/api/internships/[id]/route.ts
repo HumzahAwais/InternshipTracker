@@ -1,11 +1,17 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
+type RouteParams = {
+  params: {
+    id: string;
+  };
+};
+
 export async function DELETE(
-  request: Request,
-  { params }: { params: { id: string } }
+  request: NextRequest,
+  { params }: RouteParams
 ): Promise<NextResponse> {
   try {
     const { id } = params;
@@ -21,7 +27,7 @@ export async function DELETE(
       where: { id: Number(id) },
     });
     return NextResponse.json({ success: true });
-  } catch (error: unknown) {
+  } catch (error) {
     console.error("Delete error:", error);
     return NextResponse.json(
       { error: "Failed to delete internship" },
@@ -31,8 +37,8 @@ export async function DELETE(
 }
 
 export async function PUT(
-  request: Request,
-  { params }: { params: { id: string } }
+  request: NextRequest,
+  { params }: RouteParams
 ): Promise<NextResponse> {
   try {
     const { id } = params;
@@ -56,7 +62,7 @@ export async function PUT(
       },
     });
     return NextResponse.json(updatedInternship);
-  } catch (error: unknown) {
+  } catch (error) {
     console.error("Update error:", error);
     return NextResponse.json(
       { error: "Failed to update internship" },
